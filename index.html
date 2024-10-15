@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p style="list-style: none;">
+        <span id="url-text" data-toggle="tooltip" title="Copy URL">{{ url()->current() }}</span>
+        <button onclick="copyUrlToClipboard()" class="btn btn-light btn-sm">Copy URL</button>    
+    </p>
+    
+    <script>
+        function copyUrlToClipboard() {
+            var tempInput = document.createElement("textarea");
+            tempInput.value = document.getElementById("url-text").innerText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+    
+            var button = document.querySelector('button[onclick="copyUrlToClipboard()"]');
+            var originalText = button.innerHTML; 
+            var originalColor = button.style.color; 
+    
+            button.innerHTML = "Copied!";
+            button.style.color = "green";
+    
+            setTimeout(function() {
+                button.innerHTML = originalText;
+                button.style.color = originalColor;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
